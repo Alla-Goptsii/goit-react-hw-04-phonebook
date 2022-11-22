@@ -54,7 +54,7 @@ export default function App() {
   };
 
   const getVisibleContacts = () => {
-    console.log(contacts);
+    console.log('contacts', contacts);
     // const { filter, contacts } = this.state;
     // const normalizedFilter = filter.toLowerCase();
     return contacts.filter(contact =>
