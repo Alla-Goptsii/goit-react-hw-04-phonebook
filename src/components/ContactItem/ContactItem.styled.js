@@ -14,6 +14,8 @@ export const Button = styled.label`
   text-align: center;
 
   margin-left: 10px;
+  margin-right: 10px;
+
   margin-top: 10px;
 
   cursor: pointer;
