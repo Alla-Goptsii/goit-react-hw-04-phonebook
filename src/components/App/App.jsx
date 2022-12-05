@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+
+import useLocalStorage from '../hooks/useLocalStorage';
 import { nanoid } from 'nanoid';
 import ContactForm from '../ContactForm/ContactForm';
 import { Container } from './App.styled';
@@ -6,26 +8,10 @@ import { ContactList } from '../ContactList/ContactList';
 
 import { Filter } from '../Filter/Filter';
 
-const useLocalStorage = (key, defaultValue) => {
-  const [state, setState] = useState(() => {
-    return JSON.parse(window.localStorage.getItem('key' ?? defaultValue));
-  });
-
-  useEffect(() => {
-    window.localStorage.setItem(key, JSON.stringify(state));
-  }, [key, state]);
-
-  return [state, setState];
-};
-
 export default function App() {
   const [contacts, setContacts] = useLocalStorage('contacts', []);
 
   const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    window.localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
 
   const addContact = ({ name, number }) => {
     const newContact = {
@@ -55,6 +41,10 @@ export default function App() {
       contact.name.toLowerCase().includes(filter.toLowerCase())
     );
   };
+
+  useEffect(() => {
+    window.localStorage.setItem('contacts', JSON.stringify(contacts));
+  }, [contacts]);
 
   return (
     <Container>
